@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Calculator Layout</title>
+
+ 
+</head>
+<body style="background-color: black; display: flex; justify-content: center; align-items: center;">
+
+    
+    <div class="calculator-container"> 
+        <table style="border: 5px solid aliceblue;">
+            <tr>
+              <td colspan="4" style="width: 150px; height: 60px;">
+                <input
+                
+                  type="text"
+                  id="text"
+                  placeholder="0"
+                  style=" background-color: lightgrey;  font-size: x-large; text-align: center; font-family: monospace; width: 100%; padding: 15px; box-sizing: border-box;"
+                >
+              </td>
+            </tr>
+            <tr>
+                    <td><button onclick="clearScreen()" style="width: 60px; height: 60px; font-size: x-large;">AC</button></td>
+                    <td><button onclick="percentage()" style="width: 60px; height: 60px; font-size: x-large;">%</button></td>
+                    <td><button onclick="backspace()" style="width: 60px; height: 60px; font-size: x-large; display: flex; justify-content: center; align-items: center; " >⌫</button></td>
+                    <td><button onclick="append_value('/')" style="width: 60px; height: 60px; font-size: x-large;">&divide;</button></td>
+            </tr>
+
+            <tr>
+                <td><button onclick="append_value('7')"style="width: 60px; height: 60px; font-size: x-large;">7</button></td>
+                <td><button onclick="append_value('8')" style="width: 60px; height: 60px; font-size: x-large;">8</button></td>
+                <td><button onclick="append_value('9')" style="width: 60px; height: 60px; font-size: x-large;">9</button></td>
+                <td><button onclick="append_value('*')" style="width: 60px; height: 60px; font-size: x-large;">&times;</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="append_value('4')" style="width: 60px; height: 60px; font-size: x-large;">4</button></td>
+            <td><button onclick="append_value('5')" style="width: 60px; height: 60px; font-size: x-large;">5</button></td>
+            <td><button onclick="append_value('6')" style="width: 60px; height: 60px; font-size: x-large;">6</button></td>
+            <td><button onclick="append_value('-')" style="width: 60px; height: 60px; font-size: x-large;">-</button></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="append_value('1')" style="width: 60px; height: 60px; font-size: x-large;">1</button></td>
+        <td><button onclick="append_value('2')" style="width: 60px; height: 60px; font-size: x-large;">2</button></td>
+        <td><button onclick="append_value('3')" style="width: 60px; height: 60px; font-size: x-large;">3</button></td>
+        <td><button onclick="append_value('+')" style="width: 60px; height: 60px; font-size: x-large;">+</button></td>
+</tr>
+
+<tr>
+    <td><button onclick="append_value('00')" style="width: 60px; height: 60px; font-size: x-large;">00</button></td>
+    <td><button onclick="append_value('0')" style="width: 60px; height: 60px; font-size: x-large;">0</button></td>
+    <td><button onclick="append_value('.')" style="width: 60px; height: 60px; font-size: x-large;">.</button></td>
+    <td><button onclick="calculate()" class="equal" style="width: 60px; height: 60px; font-size: x-large;">=</button></td>
+</tr>
+
+          </table>
+          </div>
+
+
+</body>
+
+<script>
+    function append_value(value) {
+      document.getElementById('text').value += value;
+    }
+  
+    function clearScreen() {
+      document.getElementById('text').value = '';
+    }
+  
+    function calculate() {
+      try {
+        document.getElementById('text').value = eval(document.getElementById('text').value);
+      } catch {
+        document.getElementById('text').value = 'Error';
+      }
+    }
+
+    function percentage() {
+
+        let input = document.getElementById("text");
+        a = eval(input.value); 
+        a = parseFloat(a); 
+        input.value = a / 100; 
+        
+    }
+
+    function backspace() {
+
+        let input = document.getElementById("text");
+
+        if (input == 'Error'){
+            input.value = " "; 
+        }
+    
+        
+        input.value = input.value.slice(0, -1);
+    
+  }
+
+    
+  </script>
+
+<style>
+
+    button {
+      background-color: lightgrey;
+      color: black;
+      font-weight: bold;
+      box-shadow: 2px 2px 5px gray;
+      border-radius: 7px;
+      height: 60px;
+      width: 60px;
+      font-size: x-large;
+    }
+  
+
+    button:hover {
+      background-color: darkorange;
+    }
+  
+
+    .equal {
+      background-color: orange;
+      padding: 10px;
+      font-size: 18px;
+    }
+  
+    .equal:hover {
+      background-color: darkorange !important;
+      color: white;
+      cursor: pointer;
+    }
+  
+
+    .calculator-container {
+      display: flex;
+      justify-content: center;   
+      align-items: center;       
+      height: 100vh;     
+      width: 200vw;       
+    }
+  
+
+    table {
+      transform: scale(2);
+      transform-origin: center;
+    }
+  </style>
+ 
+</html>
+
+<!--// things that I got to learn
+1. inline css oveides the internal or external css unless a paramneter !important is mentioned in the internal css
+2. justify content and align items align the items vertically and horizonatally respectively
+3. while using internal css, one has to use it using the class function not my mentioning the element id
+4. id is for us to provide information about the element specifics and name is for the server to know what exactly is the element that we're using
+5. border raduis is used ot provide curving effect to the edges
+6. setting display: flex is a intresting way to contriol the physicsl dynmaics of the onboard UI
+7. vh, or vw means that the UI will strech to the height and width of the screen. the layout might exit the screen incase the content within is larger than the screen can fit
+8. box szing: border box is avery commonly used paramneter in html that provides 
+      100px (width)
++ 20px (left+right padding)
++ 10px (left+right border)
+= 130px actual width on the page
+but by using border box property, css squeezes the box within the defined 100px only 
+9. if you want to center the image in the button I have to apply the justfy and align items paramerter to the button and not the image
+10. while defining a table, the paramters or features applies to the <td> tag won't get entirely transferred to the button tag inside so while using inline css make sure tp apply it to the button tag too. 
+11. use parsefloat instead of eval to avoid any malcious text being entered im your software
